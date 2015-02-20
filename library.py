@@ -45,7 +45,7 @@ class LibraryFunctions():
     self.WINDOW.setProperty("recentepisodes-data", "LOADING")
 
     # TODO: Give priority last added episode more then last watched tvshow.
-    json_string_tvshows = '{"jsonrpc": "2.0", "id": "service.quartz.tvshelf_gettvshowids", "method": "VideoLibrary.GetTVShows", "params": {"properties": ["title", "studio", "mpaa", "file", "art"],'
+    json_string_tvshows = '{"jsonrpc": "2.0", "id": "service.quartz.tvshelf_gettvshowids", "method": "VideoLibrary.GetTVShows", "params": {"properties": [],'
     json_query_tvshows = xbmc.executeJSONRPC('%s "sort": {"order": "descending", "method": "lastplayed"}}}' % json_string_tvshows)
     json_query_tvshows = unicode(json_query_tvshows, 'utf-8', errors='ignore')
     json_query_tvshows = simplejson.loads(json_query_tvshows)
@@ -54,7 +54,7 @@ class LibraryFunctions():
       all_episodes = []
       for show_id in all_tvshow_ids:
         EPISODE_PER_SHOW_LIMIT = 1
-        json_string_episodes = '{"jsonrpc": "2.0", "id": "service.quartz.tvshelf_getepisodes", "method": "VideoLibrary.GetEpisodes", "params": {"tvshowid": %d, "properties": ["title", "playcount", "dateadded", "season", "episode", "showtitle", "plot", "file", "rating", "resume", "tvshowid", "art", "streamdetails", "firstaired", "runtime"], "limits": {"end": %d},' % (show_id, EPISODE_PER_SHOW_LIMIT)
+        json_string_episodes = '{"jsonrpc": "2.0", "id": "service.quartz.tvshelf_getepisodes", "method": "VideoLibrary.GetEpisodes", "params": {"tvshowid": %d, "properties": ["title", "season", "episode", "file", "resume", "art"], "limits": {"end": %d},' % (show_id, EPISODE_PER_SHOW_LIMIT)
         json_query_episodes = xbmc.executeJSONRPC('%s "sort": {"order": "ascending", "method": "episode"}, "filter": {"field": "playcount", "operator": "lessthan", "value": "1"}}}' % json_string_episodes)
         json_query_episodes = unicode(json_query_episodes, 'utf-8', errors='ignore')
         json_query_episodes = simplejson.loads(json_query_episodes)

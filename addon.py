@@ -48,49 +48,16 @@ class Main:
       json_query = simplejson.loads(json_query)
       if 'result'in json_query and 'episodes' in json_query['result']:
         for item in json_query['result']['episodes']:
-          episode = "%.2d" % float(item['episode'])
-          season = "%.2d" % float(item['season'])
-          episodeno = "s%se%s" % (season, episode)
-          plot = item['plot']
-          if "cast" in item:
-            cast = self._get_cast(item['cast'])
           liz = xbmcgui.ListItem(item['title'])
           liz.setInfo(type="Video", infoLabels={"Title": item['title'],
                                                 "Episode": item['episode'],
                                                 "Season": item['season'],
-                                                "Premiered": item['firstaired'],
-                                                "Plot": plot,
-                                                "TVshowTitle": item['showtitle'],
-                                                "Rating": str(round(float(item['rating']))),
-                                                "Playcount": item['playcount'], })
-          if "director" in item:
-            liz.setInfo(type="Video", infoLabels={"Director": " / ".join(item['director'])})
-          if "writer" in item:
-            liz.setInfo(type="Video", infoLabels={"Writer": " / ".join(item['writer'])})
-          if "cast" in item:
-            liz.setInfo(type="Video", infoLabels={"Cast": cast[0]})
-            liz.setInfo(type="Video", infoLabels={"CastAndRole": cast[1]})
-          liz.setProperty("episodeno", episodeno)
+                                                })
           liz.setProperty("resumetime", str(item['resume']['position']))
-          liz.setProperty("totaltime", str(item['resume']['total']))
           liz.setArt(item['art'])
-          liz.setThumbnailImage(item['art'].get('thumb', ''))
-          liz.setIconImage('DefaultTVShows.png')
-          liz.setProperty("dbid", str(item['episodeid']))
           liz.setProperty("fanart_image", item['art'].get('tvshow.fanart', ''))
-          for key, value in item['streamdetails'].iteritems():
-            for stream in value:
-              liz.addStreamInfo(key, stream)
           full_liz.append((item['file'], liz, False))
       del json_query
-
-  def _get_cast(self, castData):
-    listCast = []
-    listCastAndRole = []
-    for castmember in castData:
-      listCast.append(castmember["name"])
-      listCastAndRole.append((castmember["name"], castmember["role"]))
-    return [listCast, listCastAndRole]
 
   def _get_data(self, request):
     if request == "recentepisodes":
