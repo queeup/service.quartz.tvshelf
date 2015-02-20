@@ -35,7 +35,7 @@ class Main:
 
     full_liz = list()
     xbmcplugin.setContent(int(sys.argv[1]), 'episodes')
-    self.parse_tvshows('recentepisodes', full_liz)
+    self.parse_tvshows('quartz_tvshelf', full_liz)
     xbmcplugin.addDirectoryItems(int(sys.argv[1]), full_liz)
     xbmcplugin.endOfDirectory(handle=int(sys.argv[1]))
 
@@ -60,7 +60,7 @@ class Main:
       del json_query
 
   def _get_data(self, request):
-    if request == "recentepisodes":
+    if request == "quartz_tvshelf":
       return LIBRARY._fetch_recent_episodes(self.USECACHE)
 
   def _parse_argv(self):

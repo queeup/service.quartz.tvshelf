@@ -37,12 +37,12 @@ class LibraryFunctions():
     return None
 
   def _fetch_recent_episodes(self, useCache=False):
-    data = self._get_data("recentepisodes", useCache)
+    data = self._get_data("quartz_tvshelf", useCache)
     if data is not None:
       return data
 
     # Set that we're getting updated data
-    self.WINDOW.setProperty("recentepisodes-data", "LOADING")
+    self.WINDOW.setProperty("quartz_tvshelf-data", "LOADING")
 
     # TODO: Give priority last added episode more then last watched tvshow.
     json_string_tvshows = '{"jsonrpc": "2.0", "id": "service.quartz.tvshelf_gettvshowids", "method": "VideoLibrary.GetTVShows", "params": {"properties": [],'
@@ -64,7 +64,7 @@ class LibraryFunctions():
     json_query = simplejson.dumps({"result": {"episodes": all_episodes}})
     json_query = unicode(json_query, 'utf-8', errors='ignore')
 
-    self.WINDOW.setProperty("recentepisodes-data", json_query)
-    self.WINDOW.setProperty("recentepisodes", strftime("%Y%m%d%H%M%S", gmtime()))
+    self.WINDOW.setProperty("quartz_tvshelf-data", json_query)
+    self.WINDOW.setProperty("quartz_tvshelf", strftime("%Y%m%d%H%M%S", gmtime()))
 
     return json_query
