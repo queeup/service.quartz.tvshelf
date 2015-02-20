@@ -25,7 +25,6 @@ def log(txt):
 
 class Main:
   def __init__(self):
-    self.WINDOW = xbmcgui.Window(10000)
     self._init_vars()
     # clear our property, if another instance is already running it should stop now
     self.WINDOW.clearProperty('QuartzTVShelf_Running')
