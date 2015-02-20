@@ -1,2 +1,6 @@
-v0.0.1
+v0.0.4
+- get rid of unnecessary json query properties & listitems.
+- set unique windows property for quartz tvshelf.
+
+v0.0.3
 - Initial version
