@@ -26,8 +26,6 @@ def log(txt):
 class Main:
   def __init__(self):
     self._init_vars()
-    # clear our property, if another instance is already running it should stop now
-    self.WINDOW.clearProperty('QuartzTVShelf_Running')
     a_total = datetime.datetime.now()
     self._fetch_recent()
     b_total = datetime.datetime.now()
@@ -59,6 +57,8 @@ class Main:
           home_update = False
         elif not home_update and xbmcgui.getCurrentWindowId() != 10000:
           home_update = True
+    # clear our window property on exit
+    self.WINDOW.clearProperty('QuartzTVShelf_Running')
 
   def _update(self, _type):
     xbmc.sleep(1000)
