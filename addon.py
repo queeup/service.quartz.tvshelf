@@ -35,15 +35,15 @@ class Main:
 
     full_liz = list()
     xbmcplugin.setContent(int(sys.argv[1]), 'episodes')
-    self.parse_tvshows('quartz_tvshelf', full_liz)
+    self.parse_tvshows(full_liz)
     xbmcplugin.addDirectoryItems(int(sys.argv[1]), full_liz)
     xbmcplugin.endOfDirectory(handle=int(sys.argv[1]))
 
-  def parse_tvshows(self, request, full_liz):
-    json_query = self._get_data(request)
+  def parse_tvshows(self, full_liz):
+    json_query = self._get_data()
     while json_query == "LOADING":
       xbmc.sleep(100)
-      json_query = self._get_data(request)
+      json_query = self._get_data()
     if json_query:
       json_query = simplejson.loads(json_query)
       if 'result'in json_query and 'episodes' in json_query['result']:
@@ -59,9 +59,8 @@ class Main:
           full_liz.append((item['file'], liz, False))
       del json_query
 
-  def _get_data(self, request):
-    if request == "quartz_tvshelf":
-      return LIBRARY._fetch_recent_episodes(self.USECACHE)
+  def _get_data(self):
+    return LIBRARY._fetch_recent_episodes(self.USECACHE)
 
   def _parse_argv(self):
     try:
