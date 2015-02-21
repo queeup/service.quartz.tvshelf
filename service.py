@@ -48,8 +48,10 @@ class Main:
   def _daemon(self):
     # deamon is meant to keep script running at all time
     home_update = False
-    # TODO: use Monitor abortRequested or waitForAbort instead of xbmc.abortRequested
-    while (not xbmc.abortRequested) and self.WINDOW.getProperty('QuartzTVShelf_Running') == 'true':
+    while self.WINDOW.getProperty('QuartzTVShelf_Running') == 'true':
+      if self.Monitor.waitForAbort():
+        log('Abort requested.')
+        break
       xbmc.sleep(500)
       if not xbmc.Player().isPlayingVideo():
         if home_update and xbmcgui.getCurrentWindowId() == 10000:
