@@ -1,3 +1,9 @@
+v0.0.5
+- give timeout to waitForAbort
+- clear our monitor classes before exit to avoid left in memory.
+- clear our window property on exit
+- use Monitor waitForAbort instead of xbmc.abortRequested
+
 v0.0.4
 - get rid of unnecessary json query properties & listitems.
 - set unique windows property for quartz tvshelf.
