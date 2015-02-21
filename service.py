@@ -59,6 +59,9 @@ class Main:
           home_update = True
     # clear our window property on exit
     self.WINDOW.clearProperty('QuartzTVShelf_Running')
+    # clear our monitor classes before exit to avoid left in memory.
+    del self.Player
+    del self.Monitor
 
   def _update(self, _type):
     xbmc.sleep(1000)
