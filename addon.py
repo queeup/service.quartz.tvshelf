@@ -31,13 +31,16 @@ def log(txt):
 
 class Main:
   def __init__(self):
-    self._parse_argv()
+    self._init_vars()
 
     full_liz = list()
     xbmcplugin.setContent(int(sys.argv[1]), 'episodes')
     self.parse_tvshows(full_liz)
     xbmcplugin.addDirectoryItems(int(sys.argv[1]), full_liz)
     xbmcplugin.endOfDirectory(handle=int(sys.argv[1]))
+
+  def _init_vars(self):
+    self.USECACHE = True
 
   def parse_tvshows(self, full_liz):
     json_query = self._get_data()
@@ -60,16 +63,7 @@ class Main:
       del json_query
 
   def _get_data(self):
-    return LIBRARY._fetch_recent_episodes(self.USECACHE)
-
-  def _parse_argv(self):
-    try:
-      params = dict(arg.split("=") for arg in sys.argv[2].split("&"))
-    except:
-      params = {}
-    self.USECACHE = params.get("reload", False)
-    if self.USECACHE is not False:
-      self.USECACHE = True
+    return LIBRARY._fetch_recent_episodes(self.USECACHE)      
 
 log('script version %s started' % addon_version)
 Main()
