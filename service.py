@@ -47,7 +47,7 @@ class Main:
     # deamon is meant to keep script running at all time
     home_update = False
     while self.WINDOW.getProperty('QuartzTVShelf_Running') == 'true':
-      if self.Monitor.waitForAbort():
+      if self.Monitor.waitForAbort(1):
         log('Abort requested.')
         break
       xbmc.sleep(500)
