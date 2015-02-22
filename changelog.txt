@@ -1,3 +1,8 @@
+v0.0.6
+- reduce sleep time after database update.
+- no need to use params. removed.
+- no need internel different requests. removed.
+
 v0.0.5
 - give timeout to waitForAbort
 - clear our monitor classes before exit to avoid left in memory.
