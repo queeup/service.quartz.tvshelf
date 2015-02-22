@@ -64,7 +64,7 @@ class Main:
     del self.Monitor
 
   def _update(self, _type):
-    xbmc.sleep(1000)
+    xbmc.sleep(500)
     if _type == 'episode':
       self._fetch_recent()
     elif _type == 'video':
