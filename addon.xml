@@ -10,7 +10,7 @@
 	<extension point="xbmc.service" library="service.py" start="login" />
 	<extension point="xbmc.addon.metadata">
     <summary lang="en">Quartz TVShelf Service</summary>
-    <description lang="en">Provides NextUp (unwatched) episodes for the Home shelf. Add-on is based on Library Data Provider and striped down for Quartz Skin.</description>
+    <description lang="en">Provides first unwatched episode per TV show for the home shelf. Add-on is based on Library Data Provider and striped down for Quartz Skin.</description>
     <platform>all</platform>
     <license>WTFPL</license>
     <website></website>
