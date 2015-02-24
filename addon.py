@@ -11,9 +11,9 @@ import xbmcplugin
 import xbmcaddon
 
 if sys.version_info < (2, 7):
-  import simplejson
+  import simplejson as json
 else:
-  import json as simplejson
+  import json
 
 addon = xbmcaddon.Addon()
 addon_version = addon.getAddonInfo('version')
@@ -32,7 +32,6 @@ def log(txt):
 class Main:
   def __init__(self):
     self._init_vars()
-
     full_liz = list()
     xbmcplugin.setContent(int(sys.argv[1]), 'episodes')
     self.parse_tvshows(full_liz)
@@ -48,7 +47,7 @@ class Main:
       xbmc.sleep(100)
       json_query = self._get_data()
     if json_query:
-      json_query = simplejson.loads(json_query)
+      json_query = json.loads(json_query)
       if 'result'in json_query and 'episodes' in json_query['result']:
         for item in json_query['result']['episodes']:
           liz = xbmcgui.ListItem(item['title'])
