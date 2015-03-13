@@ -49,9 +49,9 @@ class LibraryFunctions():
     json_query_tvshows = xbmc.executeJSONRPC('%s "sort": {"order": "descending", "method": "lastplayed"}}}' % json_string_tvshows)
     json_query_tvshows = unicode(json_query_tvshows, 'utf-8', errors='ignore')
     json_query_tvshows = json.loads(json_query_tvshows)
+    all_episodes = []
     if 'result' in json_query_tvshows and 'tvshows' in json_query_tvshows['result']:
       all_tvshow_ids = [tvshow['tvshowid'] for tvshow in json_query_tvshows['result']['tvshows']]
-      all_episodes = []
       for show_id in all_tvshow_ids:
         EPISODE_PER_SHOW_LIMIT = 1
         json_string_episodes = '{"jsonrpc": "2.0", "id": "service.quartz.tvshelf_getepisodes", "method": "VideoLibrary.GetEpisodes", "params": {"tvshowid": %d, "properties": ["title", "season", "episode", "file", "resume", "art"], "limits": {"end": %d},' % (show_id, EPISODE_PER_SHOW_LIMIT)
